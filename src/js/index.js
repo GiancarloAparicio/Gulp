@@ -1,5 +1,3 @@
-import {saludo, despedida} from "./modules/example"
-import {activeMenu} from './modules/active-menu'
+import {hello} from "./modules/example"
 
-saludo()
-activeMenu()
+hello()

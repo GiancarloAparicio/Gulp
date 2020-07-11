@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "gulp",
   "main": "gulpfile.babel.js",
+  "homepage": "https://Gulp.com",
   "scripts": {
     "start": "gulp",
     "build": "gulp build"

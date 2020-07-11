@@ -3,42 +3,16 @@
 
 var _example = require("./modules/example");
 
-var _activeMenu = require("./modules/active-menu");
+(0, _example.hello)();
 
-(0, _example.saludo)();
-(0, _activeMenu.activeMenu)();
-
-},{"./modules/active-menu":2,"./modules/example":3}],2:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-var activeMenu = exports.activeMenu = function activeMenu() {
-    var menu = document.getElementById('main-menu');
-    if (menu) {
-        var links = Array.from(menu.querySelectorAll('a'));
-        links.map(function (link) {
-            if (link.href === location.href || link.href === location.href.slice(0, -1)) link.classList.add('active');
-        });
-    }
-};
-
-},{}],3:[function(require,module,exports){
+},{"./modules/example":2}],2:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-// Este es un ejemplo de como exportar funciones desde un archivo
-// En index.js se importan estas funciones
-
-var saludo = exports.saludo = function saludo() {
-  console.log('Hola mundo');
-};
-
-var despedida = exports.despedida = function despedida() {
-  console.log('Adiós mundo');
+var hello = exports.hello = function hello() {
+  console.log('Helllo Wolrd');
 };
 
 },{}]},{},[1]);
