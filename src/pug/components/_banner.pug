@@ -1,0 +1,13 @@
+
+mixin banner(banner)
+  .container
+    .banner-static
+      .banner-img
+        i(class= banner.icon)
+        img(src= banner.url alt= banner.key)
+
+      .banner-content
+        p(class="banner-title")= banner.title
+        p(class="banner-text")= banner.text
+        a(class="banner-btn" href=banner.link)= banner.button
+

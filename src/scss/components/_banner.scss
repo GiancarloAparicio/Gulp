@@ -1,0 +1,133 @@
+$color:#eee !default;
+$scale:3.2 !default;
+$filter: rgba(21,21,21,.35) !default;
+$font-size-title:24px !default;
+$font-size-text:16px !default;
+$time-animation:0.5s !default;
+$button:#FF6C6B !default;
+
+
+.banner-static{
+	position:relative;
+	color:$color
+}
+
+.banner-img{
+	position:relative;
+
+ [class*="icon-"]{
+   position: absolute;
+
+   top:20%;
+   left: 50%;
+
+   &:before{
+   	display:block;
+   	transform:scale3D(0,0,1);
+    transform-origin: center center center;
+
+    animation: icon $time-animation cubic-bezier(0,0,0,1.5) ($time-animation + 0.2s) forwards;
+	@keyframes icon{ 
+		to{
+		   transform:scale3D($scale,$scale,1);
+		  } 
+		}
+   }
+
+   &:after{
+   	content: "";
+   	border:solid 1px currentColor;
+
+   	display: block;
+   	width: 24px;
+   	height: 24px;
+
+   	position: absolute;
+   	top:0;
+   	left:-4px;
+
+   	transform: translate3D(0,-4px,0) rotateZ(45deg);
+   	opacity:0;
+
+   	animation: load $time-animation linear forwards;
+
+   	@keyframes load{ 
+   		to{
+   			opacity:1;
+   			transform:translate3D(0,-4px,0) rotateZ(45deg) scale3D($scale,$scale,1);
+
+   		} 
+   	}
+
+   }
+ }
+ 	
+ img{
+   height: 400px;
+   object-fit: cover;
+ }
+
+ &:before{
+ 	content: "";
+ 	position:absolute;
+ 	display:block;
+ 	top:0;
+ 	left:0;
+
+ 	width: 100%;
+ 	height: 100%;
+ 	background-color: $filter;
+
+ }
+
+}
+
+.banner-content{
+  width: 90%;
+
+  position:absolute;
+  top: 40%;
+  left: 10%;
+
+  color:currentColor;
+
+}
+
+.banner-title{
+  font-size: ($font-size-title);
+
+  padding-bottom: 15px;
+
+  display:block;
+ 
+}
+
+.banner-text{
+  font-size:$font-size-text;
+}
+
+.banner-title,
+.banner-text,
+.banner-btn{
+  text-align: center;
+}
+
+@media(min-width: 768px){
+	.banner-content{
+		width: 100%;
+		left: 0;
+	}
+}
+
+.banner-btn{
+  background-color: $button;
+  color: $color;
+
+  display:table;
+  padding: 4px 6px;
+  margin: 15px auto;
+
+  border-radius: 5px;
+
+  font-size: $font-size-text ;
+}

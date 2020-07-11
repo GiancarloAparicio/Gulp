@@ -1,0 +1,21 @@
+
+mixin navegacion(navegacion)
+  mixin link(link,iconLink)
+    ul(class="menu-item")
+      i(class=iconLink) 
+      a( class="menu-link" href=`#${link}`)= link
+  
+
+  header(class="navegacion")
+    h2(class="navegacion-title")= navegacion.title
+    div(class="menu-bar")
+      div(class="bar-top")
+      div(class="bar-medium")
+      div(class="bar-bottom")
+    nav(class="menu")
+      - for (var i = 0; i < navegacion.link.length; i++) 
+        +link(navegacion.link[i],navegacion.iconLink[i])
+
+   
+  
+  

@@ -1,0 +1,20 @@
+
+mixin section(section)
+  mixin info(icon,title,text)
+    .info
+      i(class=icon)
+      p(class="info-title")= title
+      p(class="info-text")= text 
+  
+  .container
+    .section
+      .info-part
+        -for (var i = 0; i < section.info.length; i++) 
+          +info(section.info[i].icon, section.info[i].title, section.info[i].text)
+        
+      .section-img
+        img(src=section.url alt=section.key)
+
+
+
+

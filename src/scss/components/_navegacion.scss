@@ -1,0 +1,235 @@
+
+$background: lighten(red, 25%) !default;
+$color: #eee !default;
+$margin: 15px !default;
+$font-size-title: 2rem !default;
+$font-size-text: 1.5rem !default;
+$time-hover: 0.2s !default;
+$time-menu: 0.3s !default;
+$filter:rgba(0,0,0,.45) !default;
+$menu-width:50% !default;
+$menu-direction: left !default;
+
+
+@function widthFilter($menu-width){
+$resto:(100 - $menu-width);
+$value:($resto * 100)/$menu-width;
+$total:(100 + $value);
+$width: ($total * $resto)/100;
+  @return $width;
+}
+
+@mixin menu-bar{
+  @if $menu-direction == left{
+    order:1;
+    margin-left: 15px;
+  } 
+
+  @if $menu-direction == right {
+    order:2;
+    margin-right: 15px;
+  } 
+}
+
+@mixin title{
+  @if $menu-direction == left{
+    order:2;
+    margin-right: 15px;
+  } 
+
+  @if $menu-direction == right  {
+    order:1;
+    margin-left: 15px;
+  } 
+}
+
+@if (($menu-direction != left) and ($menu-direction != right)){
+  @debug "Error la propiedad $menu-direction solo permite left | right";
+}
+ 
+
+.navegacion {
+  background-color: $background;
+  color: $color;
+
+  height: 50px;
+  width: 100%;
+
+  position: sticky;
+  top:0px;
+
+  display: flex;
+  justify-content: space-between;
+
+  z-index: 10;
+}
+
+.navegacion-title {
+  margin-right: $margin;
+  font-size: $font-size-title;
+  @include title;
+}
+
+.menu {
+  position: fixed;
+  top: 50px;
+  background-color: lighten($background, 10%);
+
+  width: $menu-width;
+  height: 100vh;
+
+  transition: transform $time-menu;
+  transition-timing-function: cubic-bezier(0.67, -0.05, 0.57, 0.78);
+  transform: translateX(-100%);
+  z-index: 100;
+  &.active {
+    transform: translateX(0);
+    &:after{
+      transform:translateX(0);
+      background-color: $filter;
+    }
+  }
+    
+  &:after{
+    content:"";
+    display:block;
+    width: widthFilter($menu-width);
+    height: 100vh;
+     
+    transform:translateX(-500%);
+    position:fixed;
+    top:0;
+    left:100%;
+      
+    transition:background-color $time-menu linear $time-menu;
+  }
+}
+
+.menu-item {
+  height: 70px;
+  width: 100%;
+  padding-left: 70px;
+  padding-top: 23px;
+  position: relative;
+  z-index: 100;
+  &:hover {
+    background-color: lighten($background, 2%);
+  }
+}
+
+.menu-link {
+ 
+  font-size: $font-size-text;
+  color: inherit;
+  padding: 5px 10px;
+}
+
+.menu-bar {
+  margin-left: $margin;
+  padding-top: 6px;
+  cursor: pointer;
+  @include menu-bar;
+
+  &:hover {
+    [class^="bar-"] {
+      background-color: darken($color, 10%);
+    }
+
+    [class$="top"] {
+      transform: translateY(-3.5px) scale(1.1, 1.1);
+    }
+
+    [class$="medium"] {
+      transform: scale(0.9, 0.9);
+    }
+
+    [class$="bottom"] {
+      transform: translateY(3.5px) scale(1.1, 1.1);
+    }
+  }
+
+  &.active {
+    [class$="top"] {
+      transform: scale(1.2, 1.2) translateY(10px) rotate(45deg);
+    }
+
+    [class$="medium"] {
+      position: absolute;
+      background-color: transparent;
+    }
+
+    [class$="bottom"] {
+      transform: scale(1.2, 1.2) translateY(2.5px) rotate(-45deg);
+    }
+  }
+}
+
+[class^="bar-"] {
+  width: 30px;
+  height: 5px;
+  background-color: white;
+  margin-top: 5px;
+  transition-timing-function: cubic-bezier(0.67, -0.05, 0.57, 0.78);
+  transition: background-color $time-menu, transform $time-menu;
+}
+
+@media (min-width: 768px) {
+  .navegacion {
+    position: relative;
+
+    &-title{
+      margin-right: 0;
+      margin-left: 15px;
+      order:1;
+    }
+
+    .menu-bar {
+      position: absolute;
+      opacity: 0;
+    }
+
+    .menu {
+      display: flex;
+      height: initial;
+      width: initial;
+
+      position: relative;
+      top: 0;
+
+      transform: translateX(0);
+      background-color: transparent;
+
+      margin-right: 15px;
+      margin-left: 0;
+      order:2;
+
+    &:after{
+      content:none;
+    }
+    }
+
+    .menu-item {
+      display: flex;
+      justify-content:center;
+      align-items:center;
+      
+      height: initial;
+      width: initial;
+      padding-top: 0;
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+    .menu-link {
+      margin: 0;
+    }
+  }
+}
+  
+@media (min-width: 1800px){
+
+  .navegacion{
+    width: 1800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

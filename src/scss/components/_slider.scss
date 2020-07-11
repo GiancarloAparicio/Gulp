@@ -1,0 +1,116 @@
+
+$numImg:4 !default;
+$timeAnimation:3s !default;
+$color:white !default;
+$height:300px !default;
+$filter:rgba(6,6,6,0.3) !default;
+
+@mixin position{
+ position:absolute;
+ z-index: 1;
+}
+
+.banner{  
+  width: 100%;
+  height: $height;
+  overflow: hidden; 
+}
+
+.slider{
+  animation: slider $timeAnimation*$numImg infinite;
+  animation-timing-function:steps(1,jump-start);
+
+   @keyframes slider{
+    @for $i from 0 through $numImg - 1 {
+      #{100%/$numImg * ($i + 1)}{
+        transform:translate3D(-100%*$i,0,0); 
+      }
+    }
+  }  
+}
+
+.imagen{
+ @include position;
+ width: 100%;
+ max-width: 1800px;
+
+ &:before{
+  @include position;
+   content:"";
+   display:block;
+   background-color: $filter;
+   width: 100%;
+   height:500px;
+   top:0;
+   left:0;
+      
+  }  
+
+    @for $i from 0 through $numImg - 1{
+      &:nth-child(#{$i}){
+        transform:translate3D(100%*$i,0,0); 
+      }
+    }
+
+  img{
+    max-width: 1800px;
+    height: $height;
+    display: block;
+    object-fit:cover; 
+  }
+  
+  @for $j from 1 through $numImg{
+    &:nth-child(#{$j}) .content-imagen{
+      @if($j%4==1){ transform:translate3D(-25%,0,0);}
+      @if($j%4==2){ transform:translate3D(25%,0,0);}
+      @if($j%4==3){ transform:translate3D(0,25%,0);}
+      @if($j%4==0){ transform:translate3D(0,-25%,0);} 
+   }   
+ }
+}
+
+.content-imagen{
+  @include position;
+  color:$color;
+ 
+  top:15%;
+  left:10%;
+  font-size: 30px;
+
+  width: 70%;
+  opacity:0;
+  animation: text $timeAnimation infinite;
+    
+ @keyframes text {  
+    10%,to{
+       transform:translate3D(0,0,0);
+       opacity:1;
+     }
+  }
+
+}
+
+.imagen-title{
+  font-size: 1.7em; 
+}
+
+.imagen-text{
+  font-size: .6em;
+}
+
+[class^="imagen-"]{
+  position:relative;
+  z-index:1;
+}
+
+@media(min-width:768px){
+  .banner,.imagen img{
+    height:500px;
+  }
+  
+  .content-imagen{
+    top:30%;
+  }
+}
+
+  

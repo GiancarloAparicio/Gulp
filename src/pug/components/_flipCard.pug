@@ -1,0 +1,30 @@
+
+mixin flipCard(flipCard)
+  
+  mixin link(link)
+    a(class="social-link")
+      i(class=link)
+
+  .card-flip
+    .flip
+      .front
+        i(class="flip-back")
+        i(class= flipCard.iconCard)
+        p(class="card-flip-title")= flipCard.title
+
+      .back
+        i(class="flip-front")
+        img(class="back-img" src= flipCard.user.url alt= flipCard.user.key)
+        p(class="back-title")= flipCard.user.name
+        p(class="back-subtitle")= flipCard.title
+        p(class="back-content")= flipCard.user.content
+
+        .social
+          each link in flipCard.user.links
+            +link(link)
+
+
+
+
+
+

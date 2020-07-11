@@ -1,27 +1,127 @@
--let pageTitle = 'Home'
--let siteName = 'EDboilerplate'
--let twitterAccount = '@edteamlat'
--let pageDescription = 'Simple boilerplate for static web projects with sass, pug and babel'
--let pageImage = ''
+<!-- Page MetaData -->
 -
-  let pages = [
+    metadata={
+      //Meta
+      siteName : 'Gulp-Site',                 //Title
+      description: 'Gulp-Page-Web',           //Description
+      favicon: 'assets/img/icon.png',         //Favicon
+      keyWorlds :'',                          //KeyWorlds
+ 
+      author:'Ramos Aparicio',                //Author
+      copyright:'',                           //Copyright
+
+
+      //Facebook
+      facebookTitle: 'Gulp',                  //og:title
+      facebookDescription : 'Gulp-Page-Web',  //og:description 
+      facebookLocal: 'es_PE',                 //og:locale
+      facebookLocalAlternate: 'es_CO',        //og:locale:alternate
+      facebookImage : '',                     //og:image
+      facebookImageSecure:'',                 //og:image:secure_url
+
+
+      //Twitter
+      twitterSite : '@Gulp-Site',             //twitter:site
+      twitterImage: '',                       //twitter:image
+      twitterTitle:'Gulp',                    //twitter:title
+      twitterDescription:'Gulp-Page-Web'      //twitter:description
+
+      
+    }
+
+
+<!-- Page Data -->
+-
+   navegacion={
+     title:"Wordl",
+     link:["Home","Contac","Services","Project","About"],
+     iconLink:["icon-ambulance","icon-ambulance","icon-ambulance","icon-ambulance","icon-ambulance"]
+    }
+   
+
+-
+   slider=[
     {
-      title: 'Home',
-      url: '/',
-      child: []
+      url:"./img/bussines-1.jpg",
+      key:"img1",
+      title:"Bussines",
+      text:"Lorem ipsum dolor sit non quasi praesentium",
     },
     {
-      title: 'About',
-      url: 'about.html',
-      child: [
-        {
-          title: 'Subitem1',
-          url: 'subitem1.html'
-        },
-        {
-          title: 'Subitem2',
-          url: 'subitem2.html'
-        }
-      ]
-    }
+      url:"./img/bussines-2.jpg",
+      key:"img2",
+      title:"Marketing",
+      text:"Lorem ipsum dolor sit non quasi praesentium",
+    },
+    {
+      url:"./img/bussines-3.jpg",
+      key:"img3",
+      title:"Team",
+      text:"Lorem ipsum dolor sit non quasi praesentium",
+    } 
   ]
+
+
+-
+   section={
+    url:"./img/draw1.svg",
+    key:"draw1",
+    info:[
+     {
+      icon:"icon-amazon",
+      title:"Lorem",
+      text:"Lorem ipsum prueba info de una imagenLorem ipsum prueba info de una imagenLorem ipsum prueba info de una imagen"
+     },
+     {
+      icon:"icon-amazon",
+      title:"Lorem",
+      text:"Lorem ipsum prueba info de una imagenLorem ipsum prueba info de una imagenLorem ipsum prueba info de una imagen"
+     },
+     {
+      icon:"icon-amazon",
+      title:"Lorem",
+      text:"Lorem ipsum prueba info de una imagenLorem ipsum prueba info de una imagenLorem ipsum prueba info de una imagen"
+     },
+     {
+      icon:"icon-amazon",
+      title:"Lorem",
+      text:"Lorem ipsum prueba info de una imagenLorem ipsum prueba info de una imagenLorem ipsum prueba info de una imagen"
+     }
+    ]
+   }
+
+-
+   banner={
+    title:"lorem ipsum",
+    text:"Lorem ipsum prueba info de una imagenLorem ipsum prueba info de una imagenLorem ipsum ",
+    icon:"icon-amazon",
+    url:"./img/fondo.jpg",
+    key:"fondo",
+    button:"Lorem ipsum",
+    link:"#"
+   }
+
+
+-
+   card={
+    title:"lorem ipsum",
+    text:"Lorem ipsum prueba info de una imagenLorem ipsum prueba info de una imagenLorem ipsum ",
+    img:{
+      url:"./img/card.jpg",
+      key:"card-1"
+    }
+   }
+
+-
+   flipCard={
+    title:"lorem ipsum",
+    iconCard:"icon-amazon",
+
+    user:{
+      url:"./img/card.jpg",
+      key:"User",
+      name:"Erick Ramos",
+      content:"Lorem ipsum prueba info de una imagenLorem ipsum prueba info de una imagenLorem ipsum ",
+      links:["icon-amazon","icon-amazon","icon-amazon"]
+    }
+   }
