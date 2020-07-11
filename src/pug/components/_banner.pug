@@ -4,7 +4,7 @@ mixin banner(banner)
     .banner-static
       .banner-img
         i(class= banner.icon)
-        img(src= banner.url alt= banner.key)
+        img(src= banner.url alt=banner.key itemprop="image")
 
       .banner-content
         p(class="banner-title")= banner.title

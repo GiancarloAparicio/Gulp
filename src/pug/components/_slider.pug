@@ -1,13 +1,13 @@
 
 mixin slider(slider)     
+
   mixin imagen(url,key,title,text)
     div(class="imagen")
-      img(src=url alt=key)
+      img(src=url alt=key itemprop="image")
       div(class="content-imagen")
         p(class="imagen-title")= title
         p(class="imagen-text")= text
         
-  
   
   div(class="container")
     div(class="banner")
