@@ -2,9 +2,9 @@ import gulp from 'gulp'
 import plumber from 'gulp-plumber'
 import pug from 'gulp-pug'
 import browserSync from 'browser-sync'
-import sass from 'gulp-sass'
-import postcss from 'gulp-postcss'
-import cssnano from 'cssnano'
+import sass from 'gulp-dart-sass'
+
+
 import watch from 'gulp-watch'
 import browserify from 'browserify'
 import babelify from 'babelify'
@@ -17,6 +17,13 @@ import sitemap from 'gulp-sitemap'
 import cachebust from 'gulp-cache-bust'
 import tildeImporter from 'node-sass-tilde-importer'
 
+/* imports postCss */
+import postcss from "gulp-postcss"
+import zIndex from "postcss-zindex"
+import pseudoelements from "postcss-pseudoelements"
+import nthChild from "postcss-nth-child-fix"
+import cssnano from 'cssnano'
+
 const server = browserSync.create()
 
 const startServer = () => (
@@ -27,7 +34,24 @@ const startServer = () => (
   })
 )
 
-const postcssPlugins = [
+const sassOptionsDev = {
+  includePaths: ["./node_modules"],
+  sourceComments: true,
+  outputStyle: "expanded",
+  importer: tildeImporter,
+}
+
+const sassOptionsProd = {
+  includePaths: ["./node_modules"],
+  outputStyle: "compressed",
+  sourceComments: false,
+  importer: tildeImporter,
+}
+
+const postCssPlugins = [
+  zIndex(),
+  pseudoelements(),
+  nthChild(),
   cssnano({
     core: true,
     zindex: false,
@@ -38,41 +62,26 @@ const postcssPlugins = [
   })
 ]
 
+
+
 gulp.task('styles-dev', () => {
   return gulp.src('./src/scss/styles.scss')
     .pipe(sourcemaps.init({ loadMaps : true}))
     .pipe(plumber())
-    .pipe(sass({
-      importer: tildeImporter,
-      outputStyle: 'expanded',
-      includePaths: ['./node_modules']
-    }))
-    .pipe(postcss(postcssPlugins))
+    .pipe(sass(sassOptionsDev))
+    .pipe(postcss(postCssPlugins))
     .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest('./public/assets/css/'))
+    .pipe(gulp.dest('./public/static/css/'))
     .pipe(server.stream({match: '**/*.css'}))
 })
+
 
 gulp.task('styles-build', () => {
   return gulp.src('./src/scss/styles.scss')
     .pipe(plumber())
-    .pipe(sass({
-      importer: tildeImporter,
-      includePaths: ['./node_modules']
-    }))
-    .pipe(postcss(
-      [
-        cssnano({
-          core: true,
-          zindex: false,
-          autoprefixer: {
-            add: true,
-            browsers: '> 1%, last 2 versions, Firefox ESR, Opera 12.1'
-          }
-        })
-      ]
-    ))
-    .pipe(gulp.dest('./public/assets/css/'))
+    .pipe(sass(sassOptionsProd))
+    .pipe(postcss(postCssPlugins))
+    .pipe(gulp.dest('./public/static/css/'))
 })
 
 gulp.task('pug-dev', () => (
@@ -86,10 +95,11 @@ gulp.task('pug-dev', () => (
 ))
 
 gulp.task('pug-build', () => (
-  gulp.src('./src/pug/pages/index.pug')
+  gulp.src('./src/pug/index.pug')
     .pipe(plumber())
     .pipe(pug({
-      basedir: './src/pug'
+      basedir: './src/pug',
+      pretty: true,
     }))
     .pipe(gulp.dest('./public'))
 ))
@@ -114,7 +124,7 @@ gulp.task('scripts-dev', () => (
     }))
     .pipe(sourcemaps.init({loadMaps: true}))
     .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest('./public/assets/js'))
+    .pipe(gulp.dest('./public/static/js'))
 ))
 
 gulp.task('scripts-build', () => (
@@ -137,7 +147,7 @@ gulp.task('scripts-build', () => (
     }))
     .pipe(sourcemaps.init({loadMaps: true}))
     .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest('./public/assets/js'))
+    .pipe(gulp.dest('./public/static/js'))
 ))
 
 gulp.task('images-build', () => {
@@ -148,12 +158,12 @@ gulp.task('images-build', () => {
       imagemin.optipng({optimizationLevel: 5}),
       imagemin.svgo()
     ]))
-    .pipe(gulp.dest('./public/assets/img'))
+    .pipe(gulp.dest('./public/static/img'))
 })
 
 gulp.task('images-dev', () => {
   return gulp.src('./src/img/**/**')
-    .pipe(gulp.dest('./public/assets/img'))
+    .pipe(gulp.dest('./public/static/img'))
 })
 
 gulp.task('sitemap', () => {
