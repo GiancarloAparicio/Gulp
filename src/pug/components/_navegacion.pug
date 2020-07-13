@@ -1,8 +1,11 @@
+include ../icons/icons
 
 mixin navegacion(navegacion)
   mixin link(link,iconLink)
     ul(class="menu-item")
-      i(class=iconLink) 
+      i(class="icon-"+iconLink)
+        +icons(iconLink)
+
       a( class="menu-link" href=`#${link}`)= link
   
 

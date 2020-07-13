@@ -1,8 +1,11 @@
+include ../icons/icons
 
 mixin section(section)
   mixin info(icon,title,text)
     .info
-      i(class=icon)
+      i(class="icon-"+icon)
+        +icons(icon)
+        
       p(class="info-title")= title
       p(class="info-text")= text 
   

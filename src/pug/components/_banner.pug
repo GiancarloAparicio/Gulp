@@ -1,9 +1,12 @@
+include ../icons/icons
 
 mixin banner(banner)
   .container
     .banner-static
       .banner-img
-        i(class= banner.icon)
+        i(class="icon-"+banner.icon)
+          +icons(banner.icon)
+          
         img(src= banner.url alt=banner.key itemprop="image")
 
       .banner-content
