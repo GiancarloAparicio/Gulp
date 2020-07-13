@@ -21,18 +21,18 @@ $button:#FF6C6B !default;
    top:20%;
    left: 50%;
 
-   &:before{
-   	display:block;
-   	transform:scale3D(0,0,1);
-    transform-origin: center center center;
 
-    animation: icon $time-animation cubic-bezier(0,0,0,1.5) ($time-animation + 0.2s) forwards;
+   display:block;
+   transform:scale3D(0,0,1);
+   transform-origin: center center center;
+
+   animation: icon $time-animation cubic-bezier(0,0,0,1.5) ($time-animation + 0.2s) forwards;
 	@keyframes icon{ 
 		to{
 		   transform:scale3D($scale,$scale,1);
 		  } 
 		}
-   }
+   
 
    &:after{
    	content: "";
@@ -43,7 +43,7 @@ $button:#FF6C6B !default;
    	height: 24px;
 
    	position: absolute;
-   	top:0;
+   	top:2px;
    	left:-4px;
 
    	transform: translate3D(0,-4px,0) rotateZ(45deg);
@@ -54,7 +54,7 @@ $button:#FF6C6B !default;
    	@keyframes load{ 
    		to{
    			opacity:1;
-   			transform:translate3D(0,-4px,0) rotateZ(45deg) scale3D($scale,$scale,1);
+   			transform:translate3D(0,-4px,0) rotateZ(45deg) scale3D($scale/2,$scale/2,1);
 
    		} 
    	}
