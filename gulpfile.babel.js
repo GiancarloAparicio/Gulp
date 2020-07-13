@@ -189,6 +189,15 @@ gulp.task('cache', () => {
 gulp.task('build', gulp.series(gulp.parallel(['styles-build', 'pug-build', 'scripts-build', 'images-build', 'cache', 'sitemap'])))
 
 
+gulp.task('dev', gulp.parallel( gulp.series(['styles-dev', 'pug-dev', 'scripts-dev', 'images-dev'])), () => {
+
+  gulp.series('styles-dev')
+  gulp.series('scripts-dev')
+  gulp.series('pug-dev')
+  gulp.series('images-dev')
+
+})
+
 
 
 gulp.task("default", () => {
