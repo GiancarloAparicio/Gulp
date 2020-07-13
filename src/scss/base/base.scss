@@ -1,30 +1,69 @@
+/* CSS Inicial*/
+/*
+font-family: 'Roboto', sans-serif;
+font-family: 'PT Sans', sans-serif;
+font-family: 'Lora', serif;
+*/
+
+@import url("https://fonts.googleapis.com/css2?family=Lora:wght@700&family=PT+Sans&family=Roboto&display=swap");
+
 *,
-*::before,
-*:after {
-  box-sizing: border-box;
-  margin:0;
+*::after,
+*::before {
   padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
-body {
-  font-family : sans-serif;
+html {
+  scroll-behavior: smooth;
 }
 
-a{
+p {
+  font-family: "Roboto", sans-serif;
+  font-size: 20px;
+  word-spacing: 4px;
+  letter-spacing: 0.5px;
+}
+
+a {
+  font-family: "PT Sans", sans-serif;
   text-decoration: none;
 }
 
-.container{
+h1,
+.title {
+  font-family: "Lora", serif;
+}
+
+
+img {
   width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  
-  @media(min-width:1800px){
-    width:1800px;
+  display:block;
+}
+
+i {
+  font-style: normal;
+  font-weight: bolder; 
+}
+
+li,
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: #000;
+}
+
+.container {
+  width: 100%;
+
+  @media (min-width: 1800px) {
+    width: 1800px;
+    margin-right: auto;
+    margin-left: auto;
   }
 }
 
-img{
-  width:100%;
-  display:block;
-}
